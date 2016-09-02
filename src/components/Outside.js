@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-
-
 export default class Outside extends Component {
     constructor(props){
        super(props)
@@ -9,10 +7,11 @@ export default class Outside extends Component {
        this.status = 0;
     }
     newGame(){
-        if(this.status) 
+        if(this.status){
             this.status = 0;
-        this.props.addField();
-        this.props.stateGame(0);
+            this.props.stateGame(0);
+        }   
+        this.props.addField(); 
     }
     StateGame() {
         if(!this.status){

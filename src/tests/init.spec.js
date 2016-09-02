@@ -1,4 +1,3 @@
-import { model } from '../reducers/Within'
 
 describe('src.tests.init.spec.js', function() {
     var mas [

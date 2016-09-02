@@ -74,10 +74,6 @@
 }
 .cells.enable{
     background-color: #3c8ad8;
-    -webkit-transition-duration: 0.1s; 
-    -o-transition-duration: 0.1s; 
-    -moz-transition-duration: 0.1s; 
-    transition-duration: 0.1s;
 }
 .main{
     display: flex;

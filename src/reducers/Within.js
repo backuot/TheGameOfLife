@@ -1,4 +1,4 @@
-import { ADD_FIELD, GAME_PROCESS, STATE_GAME } from '../constants/Process'
+import { ADD_FIELD, GAME_PROCESS } from '../constants/Process'
 import { ENABLE_CELL } from '../constants/Within'
 
 function initialData(n = 33, m = 37) {
@@ -29,11 +29,14 @@ function statusData(data){
 }
 
 function enableCell(data, i, j){
-   
-    if(!data[i][j]) data[i][j] = 1;
-    else data[i][j] = 0;
+    var copy = data;
     
-    return data
+    if(!copy[i][j]) copy[i][j] = 1;
+    else copy[i][j] = 0;
+    
+    data = [];
+    
+    return copy
 }
 
 function scoreNeighbors(data, i, j){
@@ -80,7 +83,7 @@ const initialState = {
 }
 
 export default function within(state = initialState, action) {
-    var data = initialData();
+    var data = [];
     
     switch (action.type) {         
         case ADD_FIELD:
@@ -107,8 +110,6 @@ export default function within(state = initialState, action) {
                 field: data,
                 info: statusData(data)
             }
-        case STATE_GAME:
-            return state
         default:
             return state
     }
