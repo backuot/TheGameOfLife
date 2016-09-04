@@ -1,21 +1,31 @@
+import { addField,
+        gameProcess,
+        stateGame
+} from '../actions/ProcessActions'
+import { enableCell } from '../actions/WithinActions'
 
-describe('src.tests.init.spec.js', function() {
-    var mas [
-        [1,1],
-        [1,0],
-        [0,0],
-        [2,2],
-        [2,1],
-        [2,0],
-        [1,0],
-        [1,2],
-        [0,2],
-    ];
-    for(var i=0; i < mas.length; i++){
-        model.editModel(mas[0],mas[1]);    
-    }
+
+
+describe('Test: Action Creators', function() {
     
-  it('Return number', function() {
-    expect(model.scoreNeighbors(1,1)).to.be.an(8);
-  });
+    it('addField valid', function() {
+        expect(addField()).to.eql({ type: 'ADD_FIELD' })
+    });
+    
+    it('gameProcess valid', function() {
+        expect(gameProcess()).to.eql({ type: 'GAME_PROCESS' })
+    });
+    
+    it('stateGame valid', function() {
+        expect(stateGame(0)).to.eql({ type: 'STATE_GAME',
+                                      payload: 0
+                                    })
+    });
+    
+    it('enableCell valid', function() {
+        expect(enableCell({i:0,j:0})).to.eql({ type: 'ENABLE_CELL',
+                                               payload: {i:0, j:0}
+                                             })
+    });
+    
 });

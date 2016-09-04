@@ -52,6 +52,7 @@
     "babel-runtime": "^6.3.19",
     "file-loader": "0.9.0",
     "font-loader": "0.1.2",
+    "jasmine": "2.5.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",

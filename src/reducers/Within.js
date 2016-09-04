@@ -1,7 +1,7 @@
 import { ADD_FIELD, GAME_PROCESS } from '../constants/Process'
 import { ENABLE_CELL } from '../constants/Within'
 
-function initialData(n = 33, m = 37) {
+export function initialData(n = 33, m = 37) {
     var data = [];
     
     for (var i = 0; i < n; i++){
