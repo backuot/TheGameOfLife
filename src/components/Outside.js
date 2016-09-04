@@ -7,12 +7,11 @@ export default class Outside extends Component {
        this.status = 0;
     }
     newGame(){
+        this.props.addField();
         if(this.status){
             this.status = 0;
-            this.props.stateGame(0);
+            this.props.stateGame(0); 
         }   
-        var state = this.props.addField(); 
-        console.log("state ", state);
     }
     StateGame() {
         if(!this.status){

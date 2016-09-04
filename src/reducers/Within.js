@@ -14,7 +14,7 @@ export function initialData(n = 33, m = 37) {
     return data
 }
 
-function statusData(data){
+export function statusData(data){
     var enable = 0;
     var disable = 0;
         
@@ -28,7 +28,7 @@ function statusData(data){
     return {enable: enable, disable: disable}
 }
 
-function enableCell(data, i, j){
+export function enableCell(data, i, j){
     var copy = data;
     
     if(!copy[i][j]) copy[i][j] = 1;
@@ -39,7 +39,7 @@ function enableCell(data, i, j){
     return copy
 }
 
-function scoreNeighbors(data, i, j){
+export function scoreNeighbors(data, i, j){
     var count = 0;
     var n = data.length;
     var m = data[0].length;
@@ -56,7 +56,7 @@ function scoreNeighbors(data, i, j){
     return count;
 }
 
-function process(data){
+export function process(data){
     var copy = [];
 
     for (var i = 0; i < data.length; i++){

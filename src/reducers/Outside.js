@@ -4,7 +4,7 @@ const initialState = {
     text: 'Старт'
 };
 
-function setState(status){
+export function setState(status){
     if(status) return 'Пауза';
     else return 'Старт';
 }

@@ -4,8 +4,6 @@ import { addField,
 } from '../actions/ProcessActions'
 import { enableCell } from '../actions/WithinActions'
 
-
-
 describe('Test: Action Creators', function() {
     
     it('addField valid', function() {
