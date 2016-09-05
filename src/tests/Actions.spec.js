@@ -25,5 +25,4 @@ describe('Test: Action Creators', function() {
                                                payload: {i:0, j:0}
                                              })
     });
-    
 });

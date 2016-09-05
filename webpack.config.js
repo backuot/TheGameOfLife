@@ -59,7 +59,11 @@ module.exports = {
         ],
         test: /\.js$/,
         plugins: ['transform-runtime'],
-      },
+      },       
+      {
+        test: /\.json$/,
+        loader: 'json'
+      },    
       {
         test:   /\.css$/,
         loader: "style-loader!css-loader!postcss-loader"

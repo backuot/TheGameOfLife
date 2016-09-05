@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export default class Conclusions extends Component {
-    
+
        render() {
         
         return <div className="conclusions">
