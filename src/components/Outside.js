@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 
 export default class Outside extends Component {
     constructor(props){
@@ -38,4 +38,11 @@ export default class Outside extends Component {
                 </div>
         </div>        
     }
+}
+
+Outside.propTypes = {
+    addField: PropTypes.func.isRequired,
+    gameProcess: PropTypes.func.isRequired,
+    stateGame: PropTypes.func.isRequired,
+    text: PropTypes.string.isRequired
 }

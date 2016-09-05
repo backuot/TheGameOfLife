@@ -36,5 +36,6 @@ export default class Within extends Component {
 }
 
 Within.propTypes = {
-    field: PropTypes.array.isRequired
+    field: PropTypes.array.isRequired,
+    enableCell: PropTypes.func.isRequired
 }

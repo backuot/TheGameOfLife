@@ -50,6 +50,11 @@ describe('Test: Component Within', function() {
         return data
     }
     var data = createMatrix();
+    data[0][0] = 1;
+    data[0][1] = 1;
+    data[0][2] = 1;
+    data[0][3] = 1;
+    data[0][4] = 1;
     
     const wrapper = shallow(<Within field={data} enableCell={function enableCell(){}} />);
      
@@ -58,6 +63,7 @@ describe('Test: Component Within', function() {
     });
     
     it('Should render as cells', function() {
-        expect(wrapper.find('div').filterWhere(a => a.hasClass('cells'))).to.have.length(1221)
+        expect(wrapper.find('div').filterWhere(a => a.hasClass('cells disable'))).to.have.length(1216)
+        expect(wrapper.find('div').filterWhere(a => a.hasClass('cells enable'))).to.have.length(5)
     });
 });

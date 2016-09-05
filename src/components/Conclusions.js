@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 
 export default class Conclusions extends Component {
 
@@ -9,4 +9,9 @@ export default class Conclusions extends Component {
                 <div className="cont enable">{this.props.enable}</div>
         </div>        
     }
+}
+
+Conclusions.propTypes = {
+    disable: PropTypes.number.isRequired,
+    enable: PropTypes.number.isRequired
 }
