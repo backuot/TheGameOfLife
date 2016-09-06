@@ -15,6 +15,13 @@ describe('Test: Component Conclusions', function() {
         expect(wrapper.contains(<div className="cont disable">0</div>)).to.equal(true)
         expect(wrapper.contains(<div className="cont enable">1</div>)).to.equal(true)
     });
+    
+    const wrapper1 = shallow(<Conclusions />);
+    
+    it('Should render as elements without props', function() {
+        expect(wrapper1.contains(<div className="cont disable"></div>)).to.equal(true)
+        expect(wrapper1.contains(<div className="cont enable"></div>)).to.equal(true)
+    });
 });
 
 describe('Test: Component Outside', function() {
@@ -29,10 +36,12 @@ describe('Test: Component Outside', function() {
       button = wrapper.find('button').filterWhere(a => a.text() === 'Новая игра')
       button1 = wrapper.find('button').filterWhere(a => a.text() === 'Старт')
     })
+        
+    const wrapper1 = shallow(<Outside />);
     
-    it('Should render as buttons', function() {
-        expect(button.hasClass('button button1')).to.be.true
-        expect(button1.hasClass('button button2')).to.be.true
+    it('Should render as buttons without props', function() {
+        expect(wrapper1.find('button').filterWhere(a => a.hasClass('button button1')).text() === 'Новая игра' ).to.equal(true)
+        expect(wrapper1.find('button').filterWhere(a => a.hasClass('button button2')).text() === '' ).to.equal(true)
     });
 });
 
@@ -65,5 +74,11 @@ describe('Test: Component Within', function() {
     it('Should render as cells', function() {
         expect(wrapper.find('div').filterWhere(a => a.hasClass('cells disable'))).to.have.length(1216)
         expect(wrapper.find('div').filterWhere(a => a.hasClass('cells enable'))).to.have.length(5)
+    });
+    
+    const wrapper1 = shallow(<Within />);
+    
+    it('Should render as cells without props', function() {
+        expect(wrapper1.find('div').filterWhere(a => a.hasClass('cells'))).to.have.length(0)
     });
 });

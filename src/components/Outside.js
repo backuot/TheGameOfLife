@@ -3,7 +3,7 @@ import React, { PropTypes, Component } from 'react'
 export default class Outside extends Component {
     constructor(props){
        super(props)
-       this.props.addField()
+       if(this.props.addField !== undefined) this.props.addField();
        this.status = 0;
     }
     newGame(){
@@ -17,17 +17,18 @@ export default class Outside extends Component {
         if(!this.status){
             this.status = 1;
             this.props.stateGame(1);
-            this.Game(this); 
+            this.Game(); 
         }
         else{
             this.status = 0;
             this.props.stateGame(0);
         } 
     }
-    Game(point){
-        if(!point.status) return;
-        point.props.gameProcess();
-        setTimeout(function(){point.Game(point)}, 700);
+    Game(){
+        var point = this;
+        if(!this.status) return;
+        this.props.gameProcess();
+        setTimeout(function(){point.Game()}, 700);
     }
     
     render() {

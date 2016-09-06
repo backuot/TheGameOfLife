@@ -10,7 +10,9 @@ export default class Within extends Component {
   }
     
   render() {
-    const { field } = this.props
+    if(this.props.field === undefined) return <div className="within"></div>
+    else{
+        var field = this.props.field;
     var point = this;
       
     return <div className="within">
@@ -31,7 +33,8 @@ export default class Within extends Component {
                 )          
               })
             }
-    </div>     
+    </div>
+    }     
   }
 }
 
