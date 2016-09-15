@@ -20,12 +20,12 @@ export default class Within extends Component {
                 return(
                     <div className="row" key={i}>
                         {item.map(function(item, j){
-                            var boundClick = point.clicked.bind(point, i, j);
+                            var enableCell = point.clicked.bind(point, i, j);
                             if(!item){
-                                return(<div className="cells disable" onClick={boundClick} key={j}></div>) 
+                                return(<div className="cells disable" onClick={enableCell} key={j}></div>) 
                             }
                             else{
-                                return(<div className="cells enable" onClick={boundClick} key={j}></div>) 
+                                return(<div className="cells enable" onClick={enableCell} key={j}></div>) 
                             }     
                           })
                         }

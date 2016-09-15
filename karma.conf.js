@@ -14,7 +14,7 @@ config.set({
     },
     // spec файлы, условимся называть по маске **_*.spec.js_**
     
-    frameworks: [ 'chai', 'jasmine' ],
+    frameworks: [ 'chai', 'jasmine', 'jasmine-sinon' ],
     // репортеры необходимы для  наглядного отображения результатов
     reporters: ['mocha', 'coverage'],
     preprocessors: {
@@ -27,7 +27,7 @@ config.set({
         'karma-jasmine', 'karma-mocha',
         'karma-chai', 'karma-coverage',
         'karma-webpack', 'karma-phantomjs-launcher',
-        'karma-mocha-reporter', 'karma-sourcemap-loader'
+        'karma-mocha-reporter', 'karma-sourcemap-loader','karma-jasmine-sinon'
     ],
     // передаем конфигурацию webpack
     webpack: webpackConfig,

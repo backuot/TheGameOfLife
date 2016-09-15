@@ -23,11 +23,10 @@
     height: 10px;
     margin-left: 1px;
     margin-bottom: 1px;
-    -webkit-transition-duration: 0.1s; 
-    -o-transition-duration: 0.1s;  
 }
 .row{
-   display: flex;
+    display: -webkit-flex;
+    display: flex;
 }
 .cells.disable:hover {
     background-color: #d8d8d8;
@@ -39,7 +38,7 @@
     height: 20px;
     border-radius: 10px;
     font-size: 14px;
-    font-family: "MyriadPro-Regular";
+    font-family: "MyriadPro-Regular", "Arial", "sans-serif";
     cursor: pointer;
     color: white;
     outline: none;

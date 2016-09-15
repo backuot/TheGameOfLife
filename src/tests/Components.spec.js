@@ -3,6 +3,8 @@ import { shallow } from 'enzyme'
 import Conclusions from '../components/Conclusions'
 import Outside from '../components/Outside'
 import Within from '../components/Within'
+import { assert } from 'assert'
+import { sinon } from 'sinon'
 
 describe('Test: Component Conclusions', function() {
     const wrapper = shallow(<Conclusions disable={'0'} enable={'1'} />);
@@ -81,4 +83,12 @@ describe('Test: Component Within', function() {
     it('Should render as cells without props', function() {
         expect(wrapper1.find('div').filterWhere(a => a.hasClass('cells'))).to.have.length(0)
     });
+});
+
+describe('Sinon js tests:', function(){
+   it('should call the function', function(){
+       var stateGame = sinon.spy(Outside, 'stateGame');
+       Outside.StateGame();
+       assert(stateGame.calledOnce);  
+   }) 
 });

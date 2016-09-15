@@ -5,7 +5,13 @@ var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-eval-source-map',
+    resolve: {
+        alias: {
+            sinon: 'sinon/pkg/sinon'
+        }
+    },
+    
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
@@ -22,6 +28,9 @@ module.exports = {
     new NpmInstallPlugin()
   ],
   module: {
+      noParse: [
+      /node_modules\/sinon\//,
+    ],
     preLoaders: [
         {
           test: /.spec.js\.js$/,
@@ -52,6 +61,10 @@ module.exports = {
       }
     ],
     loaders: [
+        {
+    test: /sinon\/pkg\/sinon\.js/,
+    loader: 'legacy!imports?define=>false,require=>false',
+  },
       {
         loaders: ['react-hot', 'babel-loader'],
         include: [

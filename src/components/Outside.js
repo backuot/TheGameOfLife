@@ -25,8 +25,8 @@ export default class Outside extends Component {
         } 
     }
     Game(){
-        var point = this;
         if(!this.status) return;
+        var point = this;
         this.props.gameProcess();
         setTimeout(function(){point.Game()}, 700);
     }
