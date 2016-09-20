@@ -10,19 +10,19 @@ export default class Outside extends Component {
         this.props.addField();
         if(this.status){
             this.status = 0;
-            this.props.stateGame(0); 
-        }   
+            this.props.stateGame(0);
+        }
     }
     StateGame() {
         if(!this.status){
             this.status = 1;
             this.props.stateGame(1);
-            this.Game(); 
+            this.Game();
         }
         else{
             this.status = 0;
             this.props.stateGame(0);
-        } 
+        }
     }
     Game(){
         if(!this.status) return;
@@ -30,14 +30,14 @@ export default class Outside extends Component {
         this.props.gameProcess();
         setTimeout(function(){point.Game()}, 700);
     }
-    
+
     render() {
         return <div className="outside">
                 <div className="cont">
                     <button className="button button1" onClick={::this.newGame}>Новая игра</button>
                     <button className="button button2" onClick={::this.StateGame}>{this.props.text}</button>
                 </div>
-        </div>        
+        </div>
     }
 }
 

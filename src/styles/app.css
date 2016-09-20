@@ -1,12 +1,14 @@
-.outside{
+.outside {
     background-color: #4CAF50;
     min-width: 400px;
     width: 410px;
     height: 406px;
     border-radius: 10px;
     padding: 10px 10px 19px 10px;
+    position: absolute;
 }
-.within{
+
+.within {
     background-color: white;
     height: 363px;
     padding: 1px 0 0 0;
@@ -15,7 +17,8 @@
     margin-top: 45px;
     margin-left: 10px;
 }
-.cells{
+
+.cells {
     background-color: #ebebeb;
     min-width: 10px;
     min-height: 10px;
@@ -24,17 +27,19 @@
     margin-left: 1px;
     margin-bottom: 1px;
 }
-.row{
+.row {
     display: -webkit-flex;
     display: flex;
 }
+
 .cells.disable:hover {
     background-color: #d8d8d8;
 }
-.button{
+
+.button {
     background-color: #f4511e;
     border: none;
-    width: 86px;
+    min-width: 86px;
     height: 20px;
     border-radius: 10px;
     font-size: 14px;
@@ -42,59 +47,72 @@
     cursor: pointer;
     color: white;
     outline: none;
+    vertical-align: top;
 }
-.button2:hover{
+
+.button2:hover {
     background-color: #e0491a;
 }
-.button1:hover{
+
+.button1:hover {
     background-color: #07789d;
 }
-.button1{
+
+.button1 {
     background-color: #008CBA;
 }
-.button2{
+
+.button2 {
     margin-left: 5px;
 }
-.outside>.cont{
+
+.outside>.cont {
     background-color: white;
-    width: 173px;
+    display: inline-block;
     height: auto;
-    display: flex;
     padding: 3px 3px 3px 3px;
     border-radius: 15px;
     margin-left: 118px;
     margin-bottom: 10px;
 }
-.button1:active{
+
+.button1:active {
     background-color: #075872;
 }
 .button2:active{
     background-color: #983111;
 }
-.cells.enable{
+.cells.enable {
     background-color: #3c8ad8;
 }
-.main{
+
+.main {
+    display: -webkit-flex;
     display: flex;
     margin-left: 35%;
     margin-top: 10%;
 }
-.conclusions{
+
+.conclusions {
     display: flex;
     position: absolute;
     margin-top: 414px;
     margin-left: 315px;
     height: 18px;
 }
-.conclusions >.cont{
+
+.conclusions >.cont {
     background-color: white;
     text-align: center;
-    font-family: "MyriadPro-Regular";
+    font-family: "MyriadPro-Regular", "Arial", "sans-serif";
     font-size: 13px;
     width: 40px;
-    height: 16px;
+    height: 15px;
     border-radius: 15px;
     margin-right: 5px;
+    padding: 2px 0 0 0;
+    
+   
 }
 
 
