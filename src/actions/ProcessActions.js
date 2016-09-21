@@ -1,21 +1,18 @@
-import { ADD_FIELD, GAME_PROCESS, STATE_GAME } from '../constants/Process'
+import { ADD_FIELD, GAME_PROCESS, STATE_GAME } from '../constants/Process';
 
 export function addField() {
-    
-    return {
-        type: ADD_FIELD
-    }
+  return {
+    type: ADD_FIELD,
+  };
 }
 export function gameProcess() {
-    
-    return {
-        type: GAME_PROCESS
-    }
+  return {
+    type: GAME_PROCESS,
+  };
 }
 export function stateGame(status) {
-    
-    return {
-        type: STATE_GAME,
-        payload: status
-    }
+  return {
+    type: STATE_GAME,
+    payload: status,
+  };
 }

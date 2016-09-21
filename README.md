@@ -11,3 +11,4 @@ npm install
 # open split terminal window
 npm start    # run server
 npm test     # run tests
+```

@@ -1,1 +1,1 @@
-export const ENABLE_CELL = 'ENABLE_CELL'
+export const ENABLE_CELL = 'ENABLE_CELL';

@@ -5,13 +5,12 @@ var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',
-    resolve: {
-        alias: {
-            sinon: 'sinon/pkg/sinon'
-        }
-    },
-
+  devtool: 'cheap-module-eval-source-map',
+  resolve: {
+      alias: {
+          sinon: 'sinon/pkg/sinon'
+      }
+  },
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
@@ -51,20 +50,19 @@ module.exports = {
             cacheDirectory: true,
           },
         },
-
-      {
-        test: /\.js$/,
-        loaders: ['eslint'],
-        include: [
-          path.resolve(__dirname, "src"),
-        ],
-      }
+        {
+          test: /\.js$/,
+          loaders: ['eslint'],
+          include: [
+            path.resolve(__dirname, "src"),
+          ],
+        }
     ],
     loaders: [
-        {
-    test: /sinon\/pkg\/sinon\.js/,
-    loader: 'legacy!imports?define=>false,require=>false',
-  },
+      {
+        test: /sinon\/pkg\/sinon\.js/,
+        loader: 'legacy!imports?define=>false,require=>false',
+      },
       {
         loaders: ['react-hot', 'babel-loader'],
         include: [
@@ -81,8 +79,14 @@ module.exports = {
         test:   /\.css$/,
         loader: "style-loader!css-loader!postcss-loader"
       },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
+      },
     ]
   },
   postcss: function () {
