@@ -1,8 +1,8 @@
-This starter kit contains game of life.
+This starter kit contains Game of Life.
 
 ### Getting Started
 ```
-git clone git@github.com/backuot/TheGameOfLife/tree/life-refactoring.git myProject
+git clone https://github.com/backuot/TheGameOfLife.git -b life-refactoring myProject
 cd myProject
 
 nvm use 5.1.0    # make sure to use v4 or greater
