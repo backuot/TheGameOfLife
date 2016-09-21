@@ -27,6 +27,7 @@
     margin-left: 1px;
     margin-bottom: 1px;
 }
+
 .row {
     display: -webkit-flex;
     display: flex;
@@ -79,9 +80,11 @@
 .button1:active {
     background-color: #075872;
 }
+
 .button2:active{
     background-color: #983111;
 }
+
 .cells.enable {
     background-color: #3c8ad8;
 }
