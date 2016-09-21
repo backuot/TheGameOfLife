@@ -11,7 +11,7 @@ module.exports = {
             sinon: 'sinon/pkg/sinon'
         }
     },
-    
+
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
@@ -33,7 +33,7 @@ module.exports = {
     ],
     preLoaders: [
         {
-          test: /.spec.js\.js$/,
+          test: /\.js$/,
           include: /src/,
           exclude: /tests/,
           loader: 'babel-loader',
@@ -43,7 +43,7 @@ module.exports = {
           }
         },
         {
-          test: /\.js?$\*.spec.js$/,
+          test: /\.js?$/,
           include: /src/,
           exclude: /tests/,
           loader: 'babel-istanbul',
@@ -51,7 +51,7 @@ module.exports = {
             cacheDirectory: true,
           },
         },
-        
+
       {
         test: /\.js$/,
         loaders: ['eslint'],
@@ -72,11 +72,11 @@ module.exports = {
         ],
         test: /\.js$/,
         plugins: ['transform-runtime'],
-      },       
+      },
       {
         test: /\.json$/,
         loader: 'json'
-      },    
+      },
       {
         test:   /\.css$/,
         loader: "style-loader!css-loader!postcss-loader"
