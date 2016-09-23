@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 
-export default class Within extends Component {
-  clicked(i, j) {
+export default class within extends Component {
+  enableCell(i, j) {
     var obj = {
       i,
       j,
@@ -10,35 +10,33 @@ export default class Within extends Component {
   }
 
   render() {
-    if (this.props.field === undefined) return <div className='within'></div>;
-    else {
-      var field = this.props.field;
-      var point = this;
-
-      return (<div className='within'>
-            {field.map(function (item, i) {
-              return (
-                    <div className='row' key={i}>
-                        {item.map(function (item, j) {
-                          var enableCell = point.clicked.bind(point, i, j);
-                          if (!item) {
-                            return (<div className='cells disable' onClick={enableCell} key={j}></div>);
-                          }
-                          else {
-                            return (<div className='cells enable' onClick={enableCell} key={j}></div>);
-                          }
-                        })
-                        }
-                    </div>
-                );
-            })
-            }
-    </div>);
+    if (!this.props.field) {
+      return (<div className='within'></div>);
     }
+
+    var field = this.props.field;
+    var _this = this;
+
+    return (<div className='within'>
+          {field.map(function (row, i) {
+            return (
+              <div className='row' key={i}>
+                {
+                  row.map(function (item, j) {
+                    var enableCell = _this.enableCell.bind(_this, i, j);
+                    if (!item) return (<div className='cells disable' onClick={enableCell} key={j}></div>);
+                    return (<div className='cells enable' onClick={enableCell} key={j}></div>);
+                  })
+                }
+              </div>
+            );
+          })
+         }
+    </div>);
   }
 }
 
-Within.propTypes = {
+within.propTypes = {
   field: PropTypes.array.isRequired,
   enableCell: PropTypes.func.isRequired,
 };

@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-export default class Conclusions extends Component {
+export default class conclusions extends Component {
 
   render() {
     return (<div className='conclusions'>
@@ -10,7 +10,7 @@ export default class Conclusions extends Component {
   }
 }
 
-Conclusions.propTypes = {
+conclusions.propTypes = {
   disable: PropTypes.number.isRequired,
   enable: PropTypes.number.isRequired,
 };

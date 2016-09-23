@@ -1,10 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 
-export default class Outside extends Component {
+export default class outside extends Component {
   constructor(props) {
     super(props);
-    if (this.props.addField !== undefined) this.props.addField();
     this.status = 0;
+    if (this.props.addField) {
+      this.props.addField();
+    }
   }
   newGame() {
     this.props.addField();
@@ -13,35 +15,34 @@ export default class Outside extends Component {
       this.props.stateGame(0);
     }
   }
-  StateGame() {
+  stateGame() {
     if (!this.status) {
       this.status = 1;
       this.props.stateGame(1);
-      this.Game();
-    }
-    else {
+      this.game();
+    } else {
       this.status = 0;
       this.props.stateGame(0);
     }
   }
-  Game() {
+  game() {
+    var _this = this;
     if (!this.status) return;
-    var point = this;
     this.props.gameProcess();
-    setTimeout(function () { point.Game(); }, 700);
+    setTimeout(function () { _this.game(); }, 700);
   }
 
   render() {
     return (<div className='outside'>
       <div className='cont'>
         <button className='button button1' onClick={::this.newGame}>Новая игра</button>
-        <button className='button button2' onClick={::this.StateGame}>{this.props.text}</button>
+        <button className='button button2' onClick={::this.stateGame}>{this.props.text}</button>
       </div>
     </div>);
   }
 }
 
-Outside.propTypes = {
+outside.propTypes = {
   addField: PropTypes.func.isRequired,
   gameProcess: PropTypes.func.isRequired,
   stateGame: PropTypes.func.isRequired,

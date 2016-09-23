@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
     browsers: ['PhantomJS'],
     singleRun: !argv.watch, // just run once by default
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'chai', 'sinon'],
     // npm i karma-spec-reporter --save-dev
     // displays tests in a nice readable format
     reporters: ['spec'],
@@ -31,16 +31,9 @@ module.exports = function(config) {
         // allow us to avoid including extension name
         extensions: ['', '.js', '.jsx'],
 
-        // required for enzyme to work properly
-        alias: {
-          'sinon': 'sinon/pkg/sinon'
-        }
       },
       module: {
         // don't run babel-loader through the sinon module
-        noParse: [
-          /node_modules\/sinon\//
-        ],
         // run babel loader for our tests
         loaders: [
           { test: /\.js?$/, exclude: /node_modules/, loader: 'babel' },
@@ -59,6 +52,7 @@ module.exports = function(config) {
     },
     // tell karma all the plugins we're going to be using
     plugins: [
+      'karma-sinon',
       'karma-mocha',
       'karma-chai',
       'karma-webpack',

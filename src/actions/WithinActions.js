@@ -1,4 +1,4 @@
-import { ENABLE_CELL } from '../constants/Within';
+import { ENABLE_CELL } from '../constants/within';
 
 
 export function enableCell(obj) {

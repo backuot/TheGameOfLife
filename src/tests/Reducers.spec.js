@@ -1,12 +1,13 @@
-import { initialData,
-        statusData,
-        enableCell,
-        scoreNeighbors,
-        process,
-} from '../reducers/Within';
-import { setState } from '../reducers/Outside';
+import {
+  initialData,
+  statusData,
+  enableCell,
+  scoreNeighbors,
+  process,
+} from '../reducers/within';
+import { setState } from '../reducers/outside';
 
-describe('Test: Reducer Within', function () {
+describe('Test: Reducer within', function () {
   function createMatrix(n = 33, m = 37) {
     var data = [];
 
@@ -19,6 +20,12 @@ describe('Test: Reducer Within', function () {
 
     return data;
   }
+
+  it('initialData size matrix 5x5', function () {
+    var copy = initialData(5,5);
+    expect(copy.length).to.eql(5);
+    expect(copy[0].length).to.eql(5);
+  });
 
   it('initialData returns matrix ', function () {
     expect(initialData()).to.eql(createMatrix());
@@ -46,19 +53,23 @@ describe('Test: Reducer Within', function () {
 
   it('process edit field', function () {
     this.data = createMatrix();
+
     this.data[0][1] = 1;
     this.data[1][0] = 1;
     this.data[1][1] = 1;
+
     this.copy = createMatrix();
+
     this.copy[0][0] = 1;
     this.copy[0][1] = 1;
     this.copy[1][0] = 1;
     this.copy[1][1] = 1;
+
     expect(process(this.data)).to.eql(this.copy);
   });
 });
 
-describe('Test: Reducer Outside', function () {
+describe('Test: Reducer outside', function () {
   it('setState changed state', function () {
     expect(setState(1)).to.eql('Пауза');
   });

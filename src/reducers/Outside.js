@@ -1,4 +1,4 @@
-import { STATE_GAME } from '../constants/Process';
+import { STATE_GAME } from '../constants/process';
 
 const initialState = {
   text: 'Старт',

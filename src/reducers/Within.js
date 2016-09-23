@@ -1,12 +1,14 @@
-import { ADD_FIELD, GAME_PROCESS } from '../constants/Process';
-import { ENABLE_CELL } from '../constants/Within';
+import { ADD_FIELD, GAME_PROCESS } from '../constants/process';
+import { ENABLE_CELL } from '../constants/within';
 
 export function initialData(n = 33, m = 37) {
-  var data = [];
+  var data = [],
+      i,
+      j;
 
-  for (var i = 0; i < n; i++) {
+  for (i = 0; i < n; i++) {
     data[i] = [];
-    for (var j = 0; j < m; j++) {
+    for (j = 0; j < m; j++) {
       data[i][j] = 0;
     }
   }
@@ -15,13 +17,18 @@ export function initialData(n = 33, m = 37) {
 }
 
 export function statusData(data) {
-  var enable = 0;
-  var disable = 0;
+  var enable = 0,
+      disable = 0,
+      i,
+      j;
 
-  for (var i = 0; i < data.length; i++) {
-    for (var j = 0; j < data[0].length; j++) {
-      if (data[i][j]) enable++;
-      else disable++;
+  for (i = 0; i < data.length; i++) {
+    for (j = 0; j < data[0].length; j++) {
+      if (data[i][j]) {
+        enable++;
+      } else {
+        disable++;
+      }
     }
   }
 
@@ -29,61 +36,103 @@ export function statusData(data) {
 }
 
 export function enableCell(data, i, j) {
-  var copy = data;
+  var copy = data.slice();
 
-  if (!copy[i][j]) copy[i][j] = 1;
-  else copy[i][j] = 0;
-
-  data = [];
+  if (!copy[i][j]) {
+    copy[i][j] = 1;
+  } else {
+    copy[i][j] = 0;
+  }
 
   return copy;
 }
 
 export function scoreNeighbors(data, i, j) {
-  var count = 0;
-  var n = data.length;
-  var m = data[0].length;
+  var count = 0,
+      n = data.length,
+      m = data[0].length;
 
-  if (j) if (data[i][j - 1]) count++;
-  if (j !== m - 1) if (data[i][j + 1]) count++;
-  if (i) if (data[i - 1][j]) count++;
-  if (i !== n - 1) if (data[i + 1][j]) count++;
-  if (i && j) if (data[i - 1][j - 1]) count++;
-  if (i !== n - 1 && j !== n - 1) if (data[i + 1][j + 1]) count++;
-  if (i !== n - 1 && j) if (data[i + 1][j - 1]) count++;
-  if (j !== n - 1 && i) if (data[i - 1][j + 1]) count++;
+  //Здесь внешнее условие - проверка на валидность индекса,
+  //внутреннее - проверка на активность ячейки по этому индексу.
+  //Внешних условий 8, т.к. ячейка может иметь всего 8 соседей.
+
+  if (j && data[i][j - 1]) {
+    count++;
+  }
+  if (j !== m - 1) {
+    if (data[i][j + 1]) {
+      count++;
+    }
+  }
+  if (i && data[i - 1][j]) {
+    count++;
+  }
+  if (i !== n - 1) {
+    if (data[i + 1][j]) {
+      count++;
+    }
+  }
+  if (i && j) {
+    if (data[i - 1][j - 1]) {
+      count++;
+    }
+  }
+  if (i !== n - 1 && j !== n - 1) {
+    if (data[i + 1][j + 1]) {
+      count++;
+    }
+  }
+  if (i !== n - 1 && j) {
+    if (data[i + 1][j - 1]) {
+      count++;
+    }
+  }
+  if (j !== n - 1 && i) {
+    if (data[i - 1][j + 1]) {
+      count++;
+    }
+  }
 
   return count;
 }
 
 export function process(data) {
-  var copy = [];
+  var copy = [],
+      count = 0,
+      i,
+      j;
 
-  for (var i = 0; i < data.length; i++) {
+  for (i = 0; i < data.length; i++) {
     copy[i] = [];
-    for (var j = 0; j < data[0].length; j++) {
-      var count = scoreNeighbors(data, i, j);
+    for (j = 0; j < data[0].length; j++) {
+      count = scoreNeighbors(data, i, j);
       if (data[i][j]) {
-        if (count < 2 || count > 3) copy[i][j] = 0;
-        else copy[i][j] = 1;
+        if (count < 2 || count > 3) {
+          copy[i][j] = 0;
+        } else {
+          copy[i][j] = 1;
+        }
+      } else if (count === 3) {
+        copy[i][j] = 1;
+      } else {
+        copy[i][j] = 0;
       }
-      else if (count === 3) copy[i][j] = 1;
-            else copy[i][j] = 0;
     }
   }
-
-  data = [];
 
   return copy;
 }
 
 const initialState = {
   field: [],
-  info: {},
+  info: {
+    enable: 0,
+    disable: 0,
+  },
 };
 
 export default function within(state = initialState, action) {
-  var data = [];
+  let data = [];
 
   switch (action.type) {
     case ADD_FIELD:

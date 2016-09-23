@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Outside from '../components/Outside';
-import Within from '../components/Within';
-import Conclusions from '../components/Conclusions';
-import * as WithinActions from '../actions/WithinActions';
-import * as ProcessActions from '../actions/ProcessActions';
+import Outside from '../components/outside';
+import Within from '../components/within';
+import Conclusions from '../components/conclusions';
+import * as WithinActions from '../actions/withinActions';
+import * as ProcessActions from '../actions/processActions';
 
 class App extends Component {
   render() {

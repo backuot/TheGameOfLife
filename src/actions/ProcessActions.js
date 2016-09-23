@@ -1,4 +1,4 @@
-import { ADD_FIELD, GAME_PROCESS, STATE_GAME } from '../constants/Process';
+import { ADD_FIELD, GAME_PROCESS, STATE_GAME } from '../constants/process';
 
 export function addField() {
   return {

@@ -6,11 +6,6 @@ var precss = require('precss');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
-  resolve: {
-      alias: {
-          sinon: 'sinon/pkg/sinon'
-      }
-  },
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
@@ -27,9 +22,6 @@ module.exports = {
     new NpmInstallPlugin()
   ],
   module: {
-      noParse: [
-      /node_modules\/sinon\//,
-    ],
     preLoaders: [
         {
           test: /\.js$/,

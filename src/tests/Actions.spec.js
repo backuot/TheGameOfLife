@@ -1,8 +1,9 @@
-import { addField,
-        gameProcess,
-        stateGame,
-} from '../actions/ProcessActions';
-import { enableCell } from '../actions/WithinActions';
+import {
+  addField,
+  gameProcess,
+  stateGame,
+} from '../actions/processActions';
+import { enableCell } from '../actions/withinActions';
 
 describe('Test: Action Creators', function () {
   it('addField valid', function () {

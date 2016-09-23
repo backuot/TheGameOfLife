@@ -1,9 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Conclusions from '../components/Conclusions';
-import Outside from '../components/Outside';
-import Within from '../components/Within';
-import { createRenderer } from 'react-addons-test-utils';
+import Conclusions from '../components/conclusions';
+import Outside from '../components/outside';
+import Within from '../components/within';
 
 describe('Test: Component Conclusions', function () {
   const wrapper = shallow(<Conclusions disable={'0'} enable={'1'} />);
@@ -60,6 +59,7 @@ describe('Test: Component Within', function () {
     return data;
   }
   var data = createMatrix();
+
   data[0][0] = 1;
   data[0][1] = 1;
   data[0][2] = 1;
@@ -84,7 +84,7 @@ describe('Test: Component Within', function () {
   });
 });
 
-describe('Test: Component function', function () {
+describe('Test: Component Outside functions', function () {
   it('should call the calledOnce stateGame', function () {
     const stateGame = sinon.spy();
     const wrapper = shallow(<Outside text={'Старт'} stateGame={stateGame} addField={function addField() {}} gameProcess={function gameProcess() {}} />);
