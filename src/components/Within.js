@@ -17,7 +17,8 @@ export default class within extends Component {
     var field = this.props.field;
     var _this = this;
 
-    return (<div className='within'>
+    return (
+      <div className='within'>
           {field.map(function (row, i) {
             return (
               <div className='row' key={i}>

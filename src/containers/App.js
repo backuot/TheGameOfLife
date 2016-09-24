@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import Outside from '../components/outside';
 import Within from '../components/within';
 import Conclusions from '../components/conclusions';
-import * as WithinActions from '../actions/withinActions';
-import * as ProcessActions from '../actions/processActions';
+import * as withinActions from '../actions/withinActions';
+import * as processActions from '../actions/processActions';
 
 class App extends Component {
   render() {
     const { within } = this.props;
     const { outside } = this.props;
-    const { enableCell } = this.props.WithinActions;
-    const { gameProcess, stateGame, addField } = this.props.ProcessActions;
+    const { enableCell } = this.props.withinActions;
+    const { gameProcess, stateGame, addField } = this.props.processActions;
 
     return (<div className='main'>
       <Outside text={outside.text} stateGame={stateGame} addField={addField} gameProcess={gameProcess} />
@@ -31,8 +31,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    WithinActions: bindActionCreators(WithinActions, dispatch),
-    ProcessActions: bindActionCreators(ProcessActions, dispatch),
+    withinActions: bindActionCreators(withinActions, dispatch),
+    processActions: bindActionCreators(processActions, dispatch),
   };
 }
 
