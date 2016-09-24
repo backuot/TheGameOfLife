@@ -59,38 +59,33 @@ export function scoreNeighbors(data, i, j) {
   if (j && data[i][j - 1]) {
     count++;
   }
-  if (j !== m - 1) {
-    if (data[i][j + 1]) {
-      count++;
-    }
+
+  if ((j !== m - 1) && data[i][j + 1]) {
+    count++;
   }
+
   if (i && data[i - 1][j]) {
     count++;
   }
-  if (i !== n - 1) {
-    if (data[i + 1][j]) {
-      count++;
-    }
+
+  if ((i !== n - 1) && data[i + 1][j]) {
+    count++;
   }
-  if (i && j) {
-    if (data[i - 1][j - 1]) {
-      count++;
-    }
+
+  if ((i && j) && data[i - 1][j - 1]) {
+    count++;
   }
-  if (i !== n - 1 && j !== n - 1) {
-    if (data[i + 1][j + 1]) {
+
+  if ((i !== n - 1 && j !== n - 1) && data[i + 1][j + 1]) {
       count++;
-    }
   }
-  if (i !== n - 1 && j) {
-    if (data[i + 1][j - 1]) {
+
+  if ((i !== n - 1 && j) && data[i + 1][j - 1]) {
       count++;
-    }
   }
-  if (j !== n - 1 && i) {
-    if (data[i - 1][j + 1]) {
+
+  if ((j !== n - 1 && i) && data[i - 1][j + 1]) {
       count++;
-    }
   }
 
   return count;

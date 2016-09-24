@@ -29,7 +29,7 @@ export default class outside extends Component {
     var _this = this;
     if (!this.status) return;
     this.props.gameProcess();
-    setTimeout(function () { _this.game(); }, 700);
+    setTimeout(function () { this.game(); }, 700);
   }
 
   render() {
