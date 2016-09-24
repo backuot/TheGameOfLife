@@ -25,20 +25,22 @@ export default class outside extends Component {
       this.props.stateGame(0);
     }
   }
+
   game() {
-    var _this = this;
     if (!this.status) return;
     this.props.gameProcess();
-    setTimeout(function () { _this.game(); }, 700);
+    setTimeout(this.game.bind(this), 700);
   }
 
   render() {
-    return (<div className='outside'>
-      <div className='cont'>
-        <button className='button button1' onClick={::this.newGame}>Новая игра</button>
-        <button className='button button2' onClick={::this.stateGame}>{this.props.text}</button>
+    return (
+      <div className='outside'>
+        <div className='cont'>
+          <button className='button button1' onClick={::this.newGame}>Новая игра</button>
+          <button className='button button2' onClick={::this.stateGame}>{this.props.text}</button>
+        </div>
       </div>
-    </div>);
+    );
   }
 }
 

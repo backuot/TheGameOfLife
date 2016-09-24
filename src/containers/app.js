@@ -14,11 +14,13 @@ class App extends Component {
     const { enableCell } = this.props.withinActions;
     const { gameProcess, stateGame, addField } = this.props.processActions;
 
-    return (<div className='main'>
-      <Outside text={outside.text} stateGame={stateGame} addField={addField} gameProcess={gameProcess} />
-      <Within field={within.field} enableCell={enableCell} />
-      <Conclusions disable={within.info.disable} enable={within.info.enable} />
-    </div>);
+    return (
+      <div className='main'>
+        <Outside text={outside.text} stateGame={stateGame} addField={addField} gameProcess={gameProcess} />
+        <Within field={within.field} enableCell={enableCell} />
+        <Conclusions disable={within.info.disable} enable={within.info.enable} />
+      </div>
+    );
   }
 }
 

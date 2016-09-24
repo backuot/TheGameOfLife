@@ -24,16 +24,22 @@ export default class within extends Component {
               <div className='row' key={i}>
                 {
                   row.map(function (item, j) {
-                    var enableCell = _this.enableCell.bind(_this, i, j);
-                    if (!item) return (<div className='cells disable' onClick={enableCell} key={j}></div>);
-                    return (<div className='cells enable' onClick={enableCell} key={j}></div>);
+                    var enableCell = _this.enableCell.bind(_this, i, j),
+                        cellStatus = '';
+                    if (!item) {
+                      cellStatus = 'cells disable';
+                    } else {
+                      cellStatus = 'cells enable';
+                    }
+                    return (<div className={cellStatus} onClick={enableCell} key={j}></div>);
                   })
                 }
               </div>
             );
           })
          }
-    </div>);
+      </div>
+    );
   }
 }
 
