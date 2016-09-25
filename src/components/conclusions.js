@@ -1,7 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 
 export default class conclusions extends Component {
-
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
     return (
       <div className='conclusions'>

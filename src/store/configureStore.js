@@ -10,6 +10,7 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     applyMiddleware(thunk, logger));
+  store.asyncReducers = {};
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

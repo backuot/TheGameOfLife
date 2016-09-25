@@ -6,6 +6,20 @@ export function initialData(n = 33, m = 37) {
       i,
       j;
 
+  if (n > 33 || n < 0) {
+    n = 33;
+  }
+
+  if (m > 37 || m < 0) {
+    m = 37;
+  }
+
+  if(n === 0 && m !== 0) {
+    n = 33;
+  } else if(m === 0 && n !== 0) {
+    m = 37;
+  }
+
   for (i = 0; i < n; i++) {
     data[i] = [];
     for (j = 0; j < m; j++) {
@@ -22,12 +36,14 @@ export function statusData(data) {
       i,
       j;
 
-  for (i = 0; i < data.length; i++) {
-    for (j = 0; j < data[0].length; j++) {
-      if (data[i][j]) {
-        enable++;
-      } else {
-        disable++;
+  if (data) {
+    for (i = 0; i < data.length; i++) {
+      for (j = 0; j < data[0].length; j++) {
+        if (data[i][j]) {
+          enable++;
+        } else {
+          disable++;
+        }
       }
     }
   }
@@ -36,7 +52,12 @@ export function statusData(data) {
 }
 
 export function enableCell(data, i, j) {
-  var copy = data.slice();
+  var copy;
+
+  if (!data) return 0;
+  if (!(i <= data.length && i >= 0 && j <= data[0].length && j >= 0)) return data;
+
+  copy = data.slice();
 
   if (!copy[i][j]) {
     copy[i][j] = 1;
@@ -48,9 +69,16 @@ export function enableCell(data, i, j) {
 }
 
 export function scoreNeighbors(data, i, j) {
-  var count = 0,
-      n = data.length,
-      m = data[0].length;
+  var count,
+      n,
+      m;
+
+  if (!data) return 0;
+  if (!(i <= data.length && i >= 0 && j <= data[0].length && j >= 0)) return 0;
+
+  count = 0;
+  n = data.length;
+  m = data[0].length;
 
   if (j && data[i][j - 1]) {
     count++;
@@ -73,15 +101,15 @@ export function scoreNeighbors(data, i, j) {
   }
 
   if ((i !== n - 1 && j !== n - 1) && data[i + 1][j + 1]) {
-      count++;
+    count++;
   }
 
   if ((i !== n - 1 && j) && data[i + 1][j - 1]) {
-      count++;
+    count++;
   }
 
   if ((j !== n - 1 && i) && data[i - 1][j + 1]) {
-      count++;
+    count++;
   }
 
   return count;
@@ -92,6 +120,8 @@ export function process(data) {
       count = 0,
       i,
       j;
+
+  if (!data) return 0;
 
   for (i = 0; i < data.length; i++) {
     copy[i] = [];

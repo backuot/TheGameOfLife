@@ -26,7 +26,8 @@ describe('Test: Component Conclusions', function () {
 
 describe('Test: Component Outside', function () {
   const wrapper = shallow(<Outside text={'Старт'} stateGame={function stateGame() {}} addField={function addField() {}} gameProcess={function gameProcess() {}} />);
-  let button, button1;
+  let button,
+      button1;
 
   it('Should render as a <div>', function () {
     expect(wrapper.is('div')).to.equal(true);
@@ -90,5 +91,16 @@ describe('Test: Component Outside functions', function () {
     const wrapper = shallow(<Outside text={'Старт'} stateGame={stateGame} addField={function addField() {}} gameProcess={function gameProcess() {}} />);
     wrapper.find('button').filterWhere(a => a.hasClass('button button2')).simulate('click');
     expect(stateGame).to.have.property('callCount', 1);
+  });
+
+  it('should call the calledOnce newGame', function () {
+    const addField = sinon.spy(),
+          stateGame = sinon.spy(),
+          wrapper = shallow(<Outside text={'Старт'} stateGame={stateGame} addField={addField} gameProcess={function gameProcess() {}} />);
+    wrapper.find('button').filterWhere(a => a.hasClass('button button1')).simulate('click');
+    expect(addField).to.have.property('callCount', 2);
+    expect(stateGame).to.have.property('callCount', 0);
+    expect(wrapper.find('button').filterWhere(a => a.hasClass('button button2')).text() === 'Старт').to.equal(true);
+    expect(wrapper.find('div').filterWhere(a => a.hasClass('cells enable'))).to.have.length(0);
   });
 });

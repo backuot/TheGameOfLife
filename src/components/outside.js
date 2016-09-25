@@ -8,6 +8,7 @@ export default class outside extends Component {
       this.props.addField();
     }
   }
+  
   newGame() {
     this.props.addField();
     if (this.status) {
@@ -15,6 +16,7 @@ export default class outside extends Component {
       this.props.stateGame(0);
     }
   }
+
   stateGame() {
     if (!this.status) {
       this.status = 1;
