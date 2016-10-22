@@ -11,7 +11,6 @@ export function setState(status) {
 
 export default function within(state = initialState, action) {
   switch (action.type) {
-
     case STATE_GAME:
       return {
         ...state,

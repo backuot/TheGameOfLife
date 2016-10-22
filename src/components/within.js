@@ -1,10 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
 export default class within extends Component {
-  constructor(props) {
-    super(props);
-  }
-  
   enableCell(i, j) {
     var obj = {
       i,
