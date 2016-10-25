@@ -15,7 +15,6 @@ export default class within extends Component {
     }
 
     var field = this.props.field;
-    var _this = this;
 
     return (
       <div className='within'>
@@ -24,7 +23,7 @@ export default class within extends Component {
               <div className='row' key={i}>
                 {
                   row.map(function (item, j) {
-                    var enableCell = _this.enableCell.bind(_this, i, j),
+                    var enableCell = this.enableCell.bind(this, i, j),
                         cellStatus = '';
                     if (!item) {
                       cellStatus = 'cells disable';
@@ -32,11 +31,11 @@ export default class within extends Component {
                       cellStatus = 'cells enable';
                     }
                     return (<div className={cellStatus} onClick={enableCell} key={j}></div>);
-                  })
+                  }, this)
                 }
               </div>
             );
-          })
+          }, this)
          }
       </div>
     );

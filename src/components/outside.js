@@ -8,7 +8,7 @@ export default class outside extends Component {
       this.props.addField();
     }
   }
-  
+
   newGame() {
     this.props.addField();
     if (this.status) {
@@ -31,7 +31,7 @@ export default class outside extends Component {
   game() {
     if (!this.status) return;
     this.props.gameProcess();
-    setTimeout(this.game.bind(this), 700);
+    setTimeout(() => (this).game(), 700);
   }
 
   render() {

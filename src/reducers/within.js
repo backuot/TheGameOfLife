@@ -1,29 +1,26 @@
 import { ADD_FIELD, GAME_PROCESS } from '../constants/process';
 import { ENABLE_CELL } from '../constants/within';
 
+function inRange(value, minValue, maxValue) {
+  if (value > maxValue || value < minValue) return false;
+  else return true;
+}
+
 export function initialData(n = 33, m = 37) {
-  var data = [],
-      i,
-      j;
+  let data = [];
+  let rows = inRange(n, 0, 33) ? n : 33;
+  let columns = inRange(m, 0, 37) ? m : 37;
 
-  if (n > 33 || n < 0) {
-    n = 33;
+  if(rows === 0 && columns !== 0) {
+    rows = 33;
+  } else if(columns === 0 && rows !== 0) {
+    columns = 37;
   }
 
-  if (m > 37 || m < 0) {
-    m = 37;
-  }
-
-  if(n === 0 && m !== 0) {
-    n = 33;
-  } else if(m === 0 && n !== 0) {
-    m = 37;
-  }
-
-  for (i = 0; i < n; i++) {
-    data[i] = [];
-    for (j = 0; j < m; j++) {
-      data[i][j] = 0;
+  for (let row = 0; row < rows; row++) {
+    data[row] = [];
+    for (let column = 0; column < columns; column++) {
+      data[row][column] = 0;
     }
   }
 
