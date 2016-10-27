@@ -1,49 +1,49 @@
 import {
-  initialData,
-  statusData,
+  initialField,
+  getStatusField,
   enableCell,
-  scoreNeighbors,
-  process,
-} from '../reducers/within';
-import { setState } from '../reducers/outside';
+  scoreNeighborsCell,
+  changeStructureField
+} from '../reducers/gameFieldState';
+import { setStateText } from '../reducers/gameControlState';
 
-describe('Test: Reducer within', function () {
-  function createMatrix(n = 33, m = 37) {
-    var data = [];
+describe('Test: Reducer gameFieldState', function () {
+  function createMatrix(rows = 33, columns = 37) {
+    let data = [];
 
-    for (var i = 0; i < n; i++) {
-      data[i] = [];
-      for (var j = 0; j < m; j++) {
-        data[i][j] = 0;
+    for (let row = 0; row < rows; row++) {
+      data[row] = [];
+      for (let column = 0; column < columns; column++) {
+        data[row][column] = 0;
       }
     }
 
     return data;
   }
 
-  it('initialData size matrix 5x5', function () {
-    var copy = initialData(5,5);
+  it('initialField size matrix 5x5', function () {
+    let copy = initialField(5,5);
     expect(copy.length).to.eql(5);
     expect(copy[0].length).to.eql(5);
   });
 
-  it('initialData matrix one agument', function () {
-    var copy = initialData(5);
+  it('initialField matrix one agument', function () {
+    let copy = initialField(5);
     expect(copy.length).to.eql(5);
     expect(copy[1].length).to.eql(37);
   });
 
-  it('initialData returns matrix ', function () {
-    expect(initialData()).to.eql(createMatrix());
+  it('initialField returns matrix ', function () {
+    expect(initialField()).to.eql(createMatrix());
   });
 
-  it('initialData size is larger than allowed  ', function () {
-    expect(initialData(50,50)).to.eql(createMatrix());
+  it('initialField size is larger than allowed  ', function () {
+    expect(initialField(50,50)).to.eql(createMatrix());
   });
 
-  it('initialData a one-dimensional array of banned', function () {
-    expect(initialData(12,0)).to.eql(createMatrix(12,37));
-    expect(initialData(0,6)).to.eql(createMatrix(33,6));
+  it('initialField a one-dimensional array of banned', function () {
+    expect(initialField(12,0)).to.eql(createMatrix(12,37));
+    expect(initialField(0,6)).to.eql(createMatrix(33,6));
   });
 
   it('enableCell activate cell', function () {
@@ -54,7 +54,7 @@ describe('Test: Reducer within', function () {
 
   it('enableCell activate cell arguments no index', function () {
     this.data = createMatrix();
-    expect(enableCell(this.data)).to.eql(this.data);
+    expect(enableCell(this.data)).to.eql(0);
   });
 
   it('enableCell activate cell arguments no data', function () {
@@ -67,40 +67,40 @@ describe('Test: Reducer within', function () {
     expect(enableCell()).to.eql(0);
   });
 
-  it('statusData information ', function () {
+  it('getStatusField information ', function () {
     this.data = createMatrix();
     this.data[0][0] = 1;
-    expect(statusData(this.data)).to.eql({ enable: 1, disable: 1220 });
+    expect(getStatusField(this.data)).to.eql({ enable: 1, disable: 1220 });
   });
 
-  it('statusData information arguments empty', function () {
-    expect(statusData()).to.eql({ enable: 0, disable: 0 });
+  it('getStatusField information arguments empty', function () {
+    expect(getStatusField()).to.eql({ enable: 0, disable: 0 });
   });
 
-  it('scoreNeighbors count neighbors ', function () {
+  it('scoreNeighborsCell count neighbors ', function () {
     this.data = createMatrix();
     this.data[0][1] = 1;
     this.data[1][0] = 1;
     this.data[1][1] = 1;
-    expect(scoreNeighbors(this.data, 0, 0)).to.eql(3);
+    expect(scoreNeighborsCell(this.data, 0, 0)).to.eql(3);
   });
 
-  it('scoreNeighbors count neighbors arguments no index', function () {
+  it('scoreNeighborsCell count neighbors arguments no index', function () {
     this.data = createMatrix();
-    expect(scoreNeighbors(this.data)).to.eql(0);
+    expect(scoreNeighborsCell(this.data)).to.eql(0);
   });
 
-  it('scoreNeighbors count neighbors arguments no data', function () {
+  it('scoreNeighborsCell count neighbors arguments no data', function () {
     this.data = createMatrix();
-    expect(scoreNeighbors(undefined,0,0)).to.eql(0);
+    expect(scoreNeighborsCell(undefined,0,0)).to.eql(0);
   });
 
-  it('scoreNeighbors count neighbors arguments empty', function () {
+  it('scoreNeighborsCell count neighbors arguments empty', function () {
     this.data = createMatrix();
-    expect(scoreNeighbors()).to.eql(0);
+    expect(scoreNeighborsCell()).to.eql(0);
   });
 
-  it('process edit field', function () {
+  it('changeStructureField edit field', function () {
     this.data = createMatrix();
 
     this.data[0][1] = 1;
@@ -114,16 +114,16 @@ describe('Test: Reducer within', function () {
     this.copy[1][0] = 1;
     this.copy[1][1] = 1;
 
-    expect(process(this.data)).to.eql(this.copy);
+    expect(changeStructureField(this.data)).to.eql(this.copy);
   });
 
-  it('process edited no arguments', function () {
-    expect(process()).to.eql(0);
+  it('changeStructureField edited no arguments', function () {
+    expect(changeStructureField()).to.eql(0);
   });
 });
 
-describe('Test: Reducer outside', function () {
+describe('Test: Reducer gameControl', function () {
   it('setState changed state', function () {
-    expect(setState(1)).to.eql('Пауза');
+    expect(setStateText(1)).to.eql('Пауза');
   });
 });

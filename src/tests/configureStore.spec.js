@@ -1,8 +1,8 @@
 import {
   default as configureStore
 } from '../store/configureStore'
-import { ADD_FIELD, GAME_PROCESS, STATE_GAME } from '../constants/process';
-import { ENABLE_CELL } from '../constants/within';
+import { ADD_FIELD, GAME_PROCESS, STATE_GAME } from '../constants/gameControl';
+import { ENABLE_CELL } from '../constants/gameField';
 
 describe('Test: configureStore', function () {
   let store = configureStore();
@@ -13,13 +13,13 @@ describe('Test: configureStore', function () {
   })
 
   it('store should be dispatch ADD_FIELD', () => {
-    function createMatrix(n = 33, m = 37) {
-      var data = [];
+    function createMatrix(rows = 33, columns = 37) {
+      let data = [];
 
-      for (var i = 0; i < n; i++) {
-        data[i] = [];
-        for (var j = 0; j < m; j++) {
-          data[i][j] = 0;
+      for (let row = 0; row < rows; row++) {
+        data[row] = [];
+        for (let column = 0; column < columns; column++) {
+          data[row][column] = 0;
         }
       }
 
@@ -32,25 +32,25 @@ describe('Test: configureStore', function () {
       type: 'ADD_FIELD',
     })
 
-    expect(store.getState().within.field.length).to.deep.equal(data.length)
-    expect(store.getState().within.info).to.deep.equal({disable: 1221, enable: 0,})
+    expect(store.getState().gameFieldState.field.length).to.deep.equal(data.length)
+    expect(store.getState().gameFieldState.info).to.deep.equal({disable: 1221, enable: 0,})
   })
 
   it('store should be dispatch ENABLE_CELL', () => {
     store.dispatch({
       type: 'ENABLE_CELL',
-      payload: {i: 1, j:1},
+      payload: {row: 1, column:1},
     })
 
-    expect(store.getState().within.info).to.deep.equal({disable: 1220, enable: 1,})
+    expect(store.getState().gameFieldState.info).to.deep.equal({disable: 1220, enable: 1,})
   })
 
   it('store should be dispatch GAME_PROCESS', () => {
     store.dispatch({
       type: 'GAME_PROCESS',
     })
-    
-    expect(store.getState().within.info).to.deep.equal({disable: 1221, enable: 0,})
+
+    expect(store.getState().gameFieldState.info).to.deep.equal({disable: 1221, enable: 0,})
   })
 
   it('store should be dispatch STATE_GAME', () => {
@@ -59,6 +59,6 @@ describe('Test: configureStore', function () {
       payload: 1
     })
 
-    expect(store.getState().outside.text).to.deep.equal('Пауза')
+    expect(store.getState().gameControlState.stateGameText).to.deep.equal('Пауза')
   })
 });

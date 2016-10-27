@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import within from './within';
-import outside from './outside';
+import gameFieldState from './gameFieldState';
+import gameControlState from './gameControlState';
 
 export default combineReducers({
-  within,
-  outside,
+  gameFieldState,
+  gameControlState,
 });

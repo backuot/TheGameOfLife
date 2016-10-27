@@ -1,24 +1,24 @@
 import {
-  addField,
-  gameProcess,
-  stateGame,
-} from '../actions/processActions';
-import { enableCell } from '../actions/withinActions';
+  createField,
+  changeStructureField,
+  setStateGame,
+} from '../actions/gameControlActions';
+import { enableCell } from '../actions/gameFieldActions';
 
 describe('Test: Action Creators', function () {
   it('addField valid', function () {
-    expect(addField()).to.eql({ type: 'ADD_FIELD' });
+    expect(createField()).to.eql({ type: 'ADD_FIELD' });
   });
 
   it('gameProcess valid', function () {
-    expect(gameProcess()).to.eql({ type: 'GAME_PROCESS' });
+    expect(changeStructureField()).to.eql({ type: 'GAME_PROCESS' });
   });
 
   it('stateGame valid', function () {
-    expect(stateGame(0)).to.eql({ type: 'STATE_GAME', payload: 0 });
+    expect(setStateGame(0)).to.eql({ type: 'STATE_GAME', payload: 0 });
   });
 
   it('enableCell valid', function () {
-    expect(enableCell({ i: 0, j: 0 })).to.eql({ type: 'ENABLE_CELL', payload: { i: 0, j: 0 } });
+    expect(enableCell({ row: 0, column: 0 })).to.eql({ type: 'ENABLE_CELL', payload: { row: 0, column: 0 } });
   });
 });

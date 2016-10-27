@@ -1,10 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 
-export default class within extends Component {
-  enableCell(i, j) {
-    var obj = {
-      i,
-      j,
+export default class GameField extends Component {
+  enableCell(row, column) {
+    let obj = {
+      row: row,
+      column: column,
     };
     this.props.enableCell(obj);
   }
@@ -18,19 +18,19 @@ export default class within extends Component {
 
     return (
       <div className='within'>
-          {field.map(function (row, i) {
+          {field.map(function (items, row) {
             return (
-              <div className='row' key={i}>
+              <div className='row' key={row}>
                 {
-                  row.map(function (item, j) {
-                    var enableCell = this.enableCell.bind(this, i, j),
+                  items.map(function (item, column) {
+                    var enableCell = this.enableCell.bind(this, row, column),
                         cellStatus = '';
                     if (!item) {
                       cellStatus = 'cells disable';
                     } else {
                       cellStatus = 'cells enable';
                     }
-                    return (<div className={cellStatus} onClick={enableCell} key={j}></div>);
+                    return (<div className={cellStatus} onClick={enableCell} key={column}></div>);
                   }, this)
                 }
               </div>
@@ -42,7 +42,7 @@ export default class within extends Component {
   }
 }
 
-within.propTypes = {
+GameField.propTypes = {
   field: PropTypes.array.isRequired,
   enableCell: PropTypes.func.isRequired,
 };

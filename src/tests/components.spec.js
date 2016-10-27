@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Conclusions from '../components/conclusions';
-import Outside from '../components/outside';
-import Within from '../components/within';
+import StateField from '../components/StateField';
+import GameControl from '../components/GameControl';
+import GameField from '../components/GameField';
 
-describe('Test: Component Conclusions', function () {
-  const wrapper = shallow(<Conclusions disable={'0'} enable={'1'} />);
+describe('Test: Component StateField', function () {
+  const wrapper = shallow(<StateField disable={'0'} enable={'1'} />);
 
   it('Should render as a <div>', function () {
     expect(wrapper.is('div')).to.equal(true);
@@ -16,7 +16,7 @@ describe('Test: Component Conclusions', function () {
     expect(wrapper.contains(<div className='cont enable'>1</div>)).to.equal(true);
   });
 
-  const wrapper1 = shallow(<Conclusions />);
+  const wrapper1 = shallow(<StateField />);
 
   it('Should render as elements without props', function () {
     expect(wrapper1.contains(<div className='cont disable'></div>)).to.equal(true);
@@ -24,8 +24,8 @@ describe('Test: Component Conclusions', function () {
   });
 });
 
-describe('Test: Component Outside', function () {
-  const wrapper = shallow(<Outside text={'Старт'} stateGame={function stateGame() {}} addField={function addField() {}} gameProcess={function gameProcess() {}} />);
+describe('Test: Component GameControl', function () {
+  const wrapper = shallow(<GameControl stateGameText={'Старт'} setStateGame={function setStateGame() {}} createField={function createField() {}} changeStructureField={function changeStructureField() {}} />);
   let button,
       button1;
 
@@ -38,7 +38,7 @@ describe('Test: Component Outside', function () {
     button1 = wrapper.find('button').filterWhere(a => a.text() === 'Старт');
   });
 
-  const wrapper1 = shallow(<Outside />);
+  const wrapper1 = shallow(<GameControl />);
 
   it('Should render as buttons without props', function () {
     expect(wrapper1.find('button').filterWhere(a => a.hasClass('button button1')).text() === 'Новая игра').to.equal(true);
@@ -46,20 +46,21 @@ describe('Test: Component Outside', function () {
   });
 });
 
-describe('Test: Component Within', function () {
-  function createMatrix(n = 33, m = 37) {
-    var data = [];
+describe('Test: Component GameField', function () {
+  function createMatrix(rows = 33, columns = 37) {
+    let data = [];
 
-    for (var i = 0; i < n; i++) {
-      data[i] = [];
-      for (var j = 0; j < m; j++) {
-        data[i][j] = 0;
+    for (let row = 0; row < rows; row++) {
+      data[row] = [];
+      for (let column = 0; column < columns; column++) {
+        data[row][column] = 0;
       }
     }
 
     return data;
   }
-  var data = createMatrix();
+  
+  let data = createMatrix();
 
   data[0][0] = 1;
   data[0][1] = 1;
@@ -67,7 +68,7 @@ describe('Test: Component Within', function () {
   data[0][3] = 1;
   data[0][4] = 1;
 
-  const wrapper = shallow(<Within field={data} enableCell={function enableCell() {}} />);
+  const wrapper = shallow(<GameField field={data} enableCell={function enableCell() {}} />);
 
   it('Should render as a <div>', function () {
     expect(wrapper.is('div')).to.equal(true);
@@ -78,28 +79,28 @@ describe('Test: Component Within', function () {
     expect(wrapper.find('div').filterWhere(a => a.hasClass('cells enable'))).to.have.length(5);
   });
 
-  const wrapper1 = shallow(<Within />);
+  const wrapper1 = shallow(<GameField />);
 
   it('Should render as cells without props', function () {
     expect(wrapper1.find('div').filterWhere(a => a.hasClass('cells'))).to.have.length(0);
   });
 });
 
-describe('Test: Component Outside functions', function () {
-  it('should call the calledOnce stateGame', function () {
-    const stateGame = sinon.spy();
-    const wrapper = shallow(<Outside text={'Старт'} stateGame={stateGame} addField={function addField() {}} gameProcess={function gameProcess() {}} />);
+describe('Test: Component GameControl functions', function () {
+  it('should call the calledOnce StateGame', function () {
+    const setStateGame = sinon.spy();
+    const wrapper = shallow(<GameControl text={'Старт'} setStateGame={setStateGame} createField={function createField() {}} changeStructureField={function changeStructureField() {}} />);
     wrapper.find('button').filterWhere(a => a.hasClass('button button2')).simulate('click');
-    expect(stateGame).to.have.property('callCount', 1);
+    expect(setStateGame).to.have.property('callCount', 1);
   });
 
-  it('should call the calledOnce newGame', function () {
-    const addField = sinon.spy(),
-          stateGame = sinon.spy(),
-          wrapper = shallow(<Outside text={'Старт'} stateGame={stateGame} addField={addField} gameProcess={function gameProcess() {}} />);
+  it('should call the calledOnce createNewGame', function () {
+    const createField = sinon.spy(),
+          setStateGame = sinon.spy(),
+          wrapper = shallow(<GameControl stateGameText={'Старт'} setStateGame={setStateGame} createField={createField} changeStructureField={function changeStructureField() {}} />);
     wrapper.find('button').filterWhere(a => a.hasClass('button button1')).simulate('click');
-    expect(addField).to.have.property('callCount', 2);
-    expect(stateGame).to.have.property('callCount', 0);
+    expect(createField).to.have.property('callCount', 2);
+    expect(setStateGame).to.have.property('callCount', 0);
     expect(wrapper.find('button').filterWhere(a => a.hasClass('button button2')).text() === 'Старт').to.equal(true);
     expect(wrapper.find('div').filterWhere(a => a.hasClass('cells enable'))).to.have.length(0);
   });

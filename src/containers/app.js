@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Outside from '../components/outside';
-import Within from '../components/within';
-import Conclusions from '../components/conclusions';
-import * as withinActions from '../actions/withinActions';
-import * as processActions from '../actions/processActions';
+import GameControl from '../components/GameControl';
+import GameField from '../components/GameField';
+import StateField from '../components/StateField';
+import * as gameFieldActions from '../actions/gameFieldActions';
+import * as gameControlActions from '../actions/gameControlActions';
 
 class App extends Component {
   render() {
-    const { within } = this.props;
-    const { outside } = this.props;
-    const { enableCell } = this.props.withinActions;
-    const { gameProcess, stateGame, addField } = this.props.processActions;
+    const { gameFieldState } = this.props;
+    const { gameControlState } = this.props;
+    const { enableCell } = this.props.gameFieldActions;
+    const { changeStructureField, setStateGame, createField } = this.props.gameControlActions;
 
     return (
       <div className='main'>
-        <Outside text={outside.text} stateGame={stateGame} addField={addField} gameProcess={gameProcess} />
-        <Within field={within.field} enableCell={enableCell} />
-        <Conclusions disable={within.info.disable} enable={within.info.enable} />
+        <GameControl stateGameText={gameControlState.stateGameText} setStateGame={setStateGame} createField={createField} changeStructureField={changeStructureField} />
+        <GameField field={gameFieldState.field} enableCell={enableCell} />
+        <StateField disable={gameFieldState.info.disable} enable={gameFieldState.info.enable} />
       </div>
     );
   }
@@ -26,15 +26,15 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    within: state.within,
-    outside: state.outside,
+    gameFieldState: state.gameFieldState,
+    gameControlState: state.gameControlState,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    withinActions: bindActionCreators(withinActions, dispatch),
-    processActions: bindActionCreators(processActions, dispatch),
+    gameFieldActions: bindActionCreators(gameFieldActions, dispatch),
+    gameControlActions: bindActionCreators(gameControlActions, dispatch),
   };
 }
 
