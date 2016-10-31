@@ -9,20 +9,20 @@ export default class GameControl extends Component {
     }
   }
 
-  createNewGame() {
-    this.props.createField();
-    if (this.status) {
-      this.status = 0;
-      this.props.setStateGame(0);
-    }
-  }
-
   setStateGame() {
     if (!this.status) {
       this.status = 1;
       this.props.setStateGame(1);
       this.changeStructureField();
     } else {
+      this.status = 0;
+      this.props.setStateGame(0);
+    }
+  }
+
+  createNewGame() {
+    this.props.createField();
+    if (this.status) {
       this.status = 0;
       this.props.setStateGame(0);
     }

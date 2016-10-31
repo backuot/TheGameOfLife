@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
-
+const nextRootReducer = require('../reducers');
 
 export default function configureStore(initialState) {
   const logger = createLogger();
@@ -14,7 +14,6 @@ export default function configureStore(initialState) {
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers');
       store.replaceReducer(nextRootReducer);
     });
   }

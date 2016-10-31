@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import GameControl from '../components/GameControl';
@@ -7,22 +7,32 @@ import StateField from '../components/StateField';
 import * as gameFieldActions from '../actions/gameFieldActions';
 import * as gameControlActions from '../actions/gameControlActions';
 
-class App extends Component {
-  render() {
-    const { gameFieldState } = this.props;
-    const { gameControlState } = this.props;
-    const { enableCell } = this.props.gameFieldActions;
-    const { changeStructureField, setStateGame, createField } = this.props.gameControlActions;
+const App = (props) => {
+  const { gameFieldState } = props;
+  const { gameControlState } = props;
+  const { enableCell } = props.gameFieldActions;
+  const { changeStructureField, setStateGame, createField } = props.gameControlActions;
 
-    return (
-      <div className='main'>
-        <GameControl stateGameText={gameControlState.stateGameText} setStateGame={setStateGame} createField={createField} changeStructureField={changeStructureField} />
-        <GameField field={gameFieldState.field} enableCell={enableCell} />
-        <StateField disable={gameFieldState.info.disable} enable={gameFieldState.info.enable} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className='main'>
+      <GameControl
+        stateGameText={gameControlState.stateGameText}
+        setStateGame={setStateGame}
+        createField={createField}
+        changeStructureField={changeStructureField}
+      />
+      <GameField field={gameFieldState.field} enableCell={enableCell} />
+      <StateField disable={gameFieldState.info.disable} enable={gameFieldState.info.enable} />
+    </div>
+  );
+};
+
+App.propTypes = {
+  gameFieldState: PropTypes.object.isRequired,
+  gameControlState: PropTypes.object.isRequired,
+  gameFieldActions: PropTypes.object.isRequired,
+  gameControlActions: PropTypes.object.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

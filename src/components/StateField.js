@@ -9,6 +9,6 @@ const StateField = (props) =>
 StateField.propTypes = {
   disable: React.PropTypes.number.isRequired,
   enable: React.PropTypes.number.isRequired,
-}
+};
 
 export default StateField;

@@ -6,7 +6,7 @@ const initialState = {
 
 export function setStateText(status) {
   if (status) return 'Пауза';
-  else return 'Старт';
+  return 'Старт';
 }
 
 export default function gameControlState(state = initialState, action) {

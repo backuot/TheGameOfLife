@@ -2,55 +2,55 @@ import { ADD_FIELD, GAME_PROCESS } from '../constants/gameControl';
 import { ENABLE_CELL } from '../constants/gameField';
 
 function inRange(value, minValue, maxValue) {
-  if(value === undefined) return false;
-  if (value > maxValue || value < minValue) return false;
-  else return true;
+  if (value === undefined) return false;
+  return (value <= maxValue && value >= minValue);
 }
 
-export function initialField(rows = 33, columns = 37) {
-  let data = [];
+function rowsZero(rows, columns) {
+  return (rows === 0 && columns !== 0);
+}
 
-  if (!inRange(rows, 0, 33)) {
+function columnsZero(rows, columns) {
+  return (columns === 0 && rows !== 0);
+}
+
+export function initialField(rowsCount = 33, columnsCount = 37) {
+  let rows = inRange(rowsCount, 0, 33) ? rowsCount : 33;
+  let columns = inRange(columnsCount, 0, 37) ? columnsCount : 37;
+
+  if (rowsZero(rows, columns)) {
     rows = 33;
-  }
-
-  if (!inRange(columns, 0, 37)) {
+  } else if (columnsZero(rows, columns)) {
     columns = 37;
   }
 
-  if (rows === 0 && columns !== 0) {
-    rows = 33;
-  } else if(columns === 0 && rows !== 0) {
-    columns = 37;
-  }
+  const zeroRow = Array.apply(null, new Array(columns)).map(Number.prototype.valueOf, 0);
 
-  for (let row = 0; row < rows; row++) {
-    data[row] = [];
-    for (let column = 0; column < columns; column++) {
-      data[row][column] = 0;
-    }
-  }
-
-  return data;
+  return Array.apply(null, new Array(rows)).map(Array.prototype.valueOf, zeroRow);
 }
 
 export function getStatusField(data) {
-  let enable = 0,
-      disable = 0;
+  let enable = 0;
+  let disable = 0;
 
   if (data) {
-    for (let row = 0; row < data.length; row++) {
-      for (let column = 0; column < data[0].length; column++) {
-        if (data[row][column]) {
+    data.map((items, row) =>
+      items.map((item, column) => {
+        if (item) {
           enable++;
         } else {
           disable++;
         }
-      }
-    }
+        return 0;
+      })
+    );
   }
 
   return { enable, disable };
+}
+
+function onEqual(opLeft, opRight) {
+  return (opLeft === opRight);
 }
 
 export function enableCell(data, row, column) {
@@ -59,21 +59,38 @@ export function enableCell(data, row, column) {
   if (!data) return 0;
   if (!inRange(row, 0, data.length) || !inRange(column, 0, data[0].length)) return 0;
 
-  copy = data.slice();
-
-  if (!copy[row][column]) {
-    copy[row][column] = 1;
-  } else {
-    copy[row][column] = 0;
-  }
+  copy = data.map((items, rowIndex) =>
+    items.map((item, columnIndex) => {
+      if (onEqual(rowIndex, row) && onEqual(columnIndex, column)) {
+        return item ? 0 : 1;
+      }
+      return item;
+    })
+  );
 
   return copy;
 }
 
+function top(row) {
+  return (row - 1 >= 0);
+}
+
+function left(column) {
+  return (column - 1 >= 0);
+}
+
+function right(column, columns) {
+  return (column + 1 < columns);
+}
+
+function bottom(row, rows) {
+  return (row + 1 < rows);
+}
+
 export function scoreNeighborsCell(data, row, column) {
-  let count = 0,
-      rows = 0,
-      columns = 0;
+  let count = 0;
+  let rows = 0;
+  let columns = 0;
 
   if (!data) return 0;
   if (!inRange(row, 0, data.length) && !inRange(column, 0, data[0].length)) return 0;
@@ -81,64 +98,36 @@ export function scoreNeighborsCell(data, row, column) {
   rows = data.length;
   columns = data[0].length;
 
-  if (column && data[row][column - 1]) {
-    count++;
-  }
+  count += top(row) ? data[row - 1][column] : 0;
+  count += bottom(row, rows) ? data[row + 1][column] : 0;
+  count += left(column) ? data[row][column - 1] : 0;
+  count += right(column, columns) ? data[row][column + 1] : 0;
 
-  if ((column !== columns - 1) && data[row][column + 1]) {
-    count++;
-  }
-
-  if (row && data[row - 1][column]) {
-    count++;
-  }
-
-  if ((row !== rows - 1) && data[row + 1][column]) {
-    count++;
-  }
-
-  if ((row && column) && data[row - 1][column - 1]) {
-    count++;
-  }
-
-  if ((row !== rows - 1 && column !== rows - 1) && data[row + 1][column + 1]) {
-    count++;
-  }
-
-  if ((row !== rows - 1 && column) && data[row + 1][column - 1]) {
-    count++;
-  }
-
-  if ((column !== rows - 1 && row) && data[row - 1][column + 1]) {
-    count++;
-  }
+  count += (top(row) && left(column)) ? data[row - 1][column - 1] : 0;
+  count += (top(row) && right(column, columns)) ? data[row - 1][column + 1] : 0;
+  count += (bottom(row, rows) && left(column)) ? data[row + 1][column - 1] : 0;
+  count += (bottom(row, rows) && right(column, columns)) ? data[row + 1][column + 1] : 0;
 
   return count;
 }
 
+function cellIsDeath(count) {
+  return (count < 2 || count > 3) ? 0 : 1;
+}
+
 export function changeStructureField(data) {
-  let copy = [],
-      count = 0;
+  let copy = [];
+  let count = 0;
 
   if (!data) return 0;
 
-  for (let row = 0; row < data.length; row++) {
-    copy[row] = [];
-    for (let column = 0; column < data[0].length; column++) {
+  copy = data.map((items, row) =>
+    items.map((item, column) => {
       count = scoreNeighborsCell(data, row, column);
-      if (data[row][column]) {
-        if (count < 2 || count > 3) {
-          copy[row][column] = 0;
-        } else {
-          copy[row][column] = 1;
-        }
-      } else if (count === 3) {
-        copy[row][column] = 1;
-      } else {
-        copy[row][column] = 0;
-      }
-    }
-  }
+      if (item) return cellIsDeath(count);
+      return (count === 3);
+    })
+  );
 
   return copy;
 }
