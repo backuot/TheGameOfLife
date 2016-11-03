@@ -1,6 +1,13 @@
 import React, { PropTypes, Component } from 'react';
 
 export default class GameControl extends Component {
+  static propTypes = {
+    createField: PropTypes.func.isRequired,
+    changeStructureField: PropTypes.func.isRequired,
+    setStateGame: PropTypes.func.isRequired,
+    stateGameText: PropTypes.string.isRequired,
+  };
+
   constructor(props) {
     super(props);
     this.status = 0;
@@ -31,7 +38,7 @@ export default class GameControl extends Component {
   changeStructureField() {
     if (!this.status) return;
     this.props.changeStructureField();
-    setTimeout(() => (this).changeStructureField(), 700);
+    setTimeout(() => this.changeStructureField(), 700);
   }
 
   render() {
@@ -45,10 +52,3 @@ export default class GameControl extends Component {
     );
   }
 }
-
-GameControl.propTypes = {
-  createField: PropTypes.func.isRequired,
-  changeStructureField: PropTypes.func.isRequired,
-  setStateGame: PropTypes.func.isRequired,
-  stateGameText: PropTypes.string.isRequired,
-};

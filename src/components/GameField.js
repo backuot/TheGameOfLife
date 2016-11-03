@@ -1,6 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 
 export default class GameField extends Component {
+  static propTypes = {
+    field: PropTypes.array.isRequired,
+    enableCell: PropTypes.func.isRequired,
+  };
+
   enableCell(row, column) {
     const obj = {
       row,
@@ -20,7 +25,7 @@ export default class GameField extends Component {
             <div className='row' key={row}>
               {
                 items.map((item, column) => {
-                  let enableCell = () => (this).enableCell(row, column);
+                  let enableCell = () => this.enableCell(row, column);
                   let cellStatus = '';
                   if (!item) {
                     cellStatus = 'cells disable';
@@ -37,8 +42,3 @@ export default class GameField extends Component {
     );
   }
 }
-
-GameField.propTypes = {
-  field: PropTypes.array.isRequired,
-  enableCell: PropTypes.func.isRequired,
-};

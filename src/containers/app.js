@@ -11,7 +11,9 @@ const App = (props) => {
   const { gameFieldState } = props;
   const { gameControlState } = props;
   const { enableCell } = props.gameFieldActions;
-  const { changeStructureField, setStateGame, createField } = props.gameControlActions;
+  const { changeStructureField } = props.gameControlActions;
+  const { setStateGame } = props.gameControlActions;
+  const { createField } = props.gameControlActions;
 
   return (
     <div className='main'>

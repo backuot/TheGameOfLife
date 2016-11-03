@@ -34,14 +34,13 @@ export function getStatusField(data) {
   let disable = 0;
 
   if (data) {
-    data.map((items, row) =>
-      items.map((item, column) => {
+    data.forEach((items) =>
+      items.forEach((item) => {
         if (item) {
           enable++;
         } else {
           disable++;
         }
-        return 0;
       })
     );
   }
@@ -53,22 +52,20 @@ function onEqual(opLeft, opRight) {
   return (opLeft === opRight);
 }
 
-export function enableCell(data, row, column) {
-  let copy = [];
+function isCurrentCell(leftCoordinate, rightCoordinate, leftIndex, rightIndex) {
+  return (leftCoordinate === leftIndex && rightCoordinate === rightIndex);
+}
 
+export function enableCell(data, row, column) {
   if (!data) return 0;
   if (!inRange(row, 0, data.length) || !inRange(column, 0, data[0].length)) return 0;
 
-  copy = data.map((items, rowIndex) =>
+  return data.map((items, rowIndex) =>
     items.map((item, columnIndex) => {
-      if (onEqual(rowIndex, row) && onEqual(columnIndex, column)) {
-        return item ? 0 : 1;
-      }
+      if (isCurrentCell(row, column, rowIndex, columnIndex)) return item ? 0 : 1;
       return item;
     })
   );
-
-  return copy;
 }
 
 function top(row) {
@@ -116,20 +113,17 @@ function cellIsDeath(count) {
 }
 
 export function changeStructureField(data) {
-  let copy = [];
   let count = 0;
 
   if (!data) return 0;
 
-  copy = data.map((items, row) =>
+  return data.map((items, row) =>
     items.map((item, column) => {
       count = scoreNeighborsCell(data, row, column);
       if (item) return cellIsDeath(count);
       return (count === 3);
     })
   );
-
-  return copy;
 }
 
 const initialState = {
