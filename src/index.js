@@ -5,6 +5,7 @@ import App from './containers/App';
 import './styles/app.css';
 import './styles/fonts.css';
 import configureStore from './store/configureStore';
+import './img/favicon.ico';
 
 const store = configureStore();
 

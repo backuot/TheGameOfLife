@@ -113,8 +113,8 @@ describe('Test: Reducer gameFieldState', function () {
     this.copy[0][1] = 1;
     this.copy[1][0] = 1;
     this.copy[1][1] = 1;
-
-    expect(changeStructureField(this.data)).to.eql(this.copy);
+    this.data = changeStructureField(this.data);
+    expect(this.data[0][0] && this.data[0][1] && this.data[1][0] && this.data[1][1]).to.equal(1);
   });
 
   it('changeStructureField edited no arguments', function () {

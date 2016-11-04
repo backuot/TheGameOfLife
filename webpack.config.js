@@ -6,21 +6,25 @@ var precss = require('precss');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
+
   entry: [
     'webpack-hot-middleware/client',
     'babel-polyfill',
     './src/index'
   ],
+
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'static'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
+
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new NpmInstallPlugin()
   ],
+
   module: {
     preLoaders: [
         {
@@ -72,12 +76,8 @@ module.exports = {
         loader: "style-loader!css-loader!postcss-loader"
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        test: /\.(png|jpg|svg|ttf|eot|woff|woff2|ico)$/,
+        loader: 'file-loader?name=[name].[ext]?[hash]'
       },
     ]
   },

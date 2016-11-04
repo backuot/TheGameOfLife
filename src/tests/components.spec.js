@@ -26,16 +26,9 @@ describe('Test: Component StateField', function () {
 
 describe('Test: Component GameControl', function () {
   const wrapper = shallow(<GameControl stateGameText={'Старт'} setStateGame={function setStateGame() {}} createField={function createField() {}} changeStructureField={function changeStructureField() {}} />);
-  let button;
-  let button1;
 
   it('Should render as a <div>', function () {
     expect(wrapper.is('div')).to.equal(true);
-  });
-
-  beforeEach(() => {
-    button = wrapper.find('button').filterWhere(a => a.text() === 'Новая игра');
-    button1 = wrapper.find('button').filterWhere(a => a.text() === 'Старт');
   });
 
   const wrapNoProps = shallow(<GameControl />);
@@ -68,10 +61,17 @@ describe('Test: Component GameField', function () {
   data[0][3] = 1;
   data[0][4] = 1;
 
-  const wrapper = shallow(<GameField field={data} enableCell={function enableCell() {}} />);
+  const enableCell = sinon.spy();
 
+  const wrapper = shallow(<GameField field={data} enableCell={enableCell} />);
   it('Should render as a <div>', function () {
     expect(wrapper.is('div')).to.equal(true);
+  });
+
+
+  it('Should click to cell is activate', function () {
+    wrapper.find('.cells').at(10).simulate('click');
+    expect(enableCell).to.have.property('callCount', 1);
   });
 
   it('Should render as cells', function () {
@@ -90,7 +90,7 @@ describe('Test: Component GameControl functions', function () {
   it('should call the calledOnce StateGame', function () {
     const setStateGame = sinon.spy();
     const wrapper = shallow(<GameControl text={'Старт'} setStateGame={setStateGame} createField={function createField() {}} changeStructureField={function changeStructureField() {}} />);
-    
+
     wrapper.find('button').filterWhere(a => a.hasClass('button button2')).simulate('click');
     expect(setStateGame).to.have.property('callCount', 1);
   });
