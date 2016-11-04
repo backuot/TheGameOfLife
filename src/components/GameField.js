@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import classNames from 'classnames';
 
 export default class GameField extends Component {
   static propTypes = {
@@ -26,12 +27,10 @@ export default class GameField extends Component {
               {
                 items.map((item, column) => {
                   let enableCell = () => this.enableCell(row, column);
-                  let cellStatus = '';
-                  if (!item) {
-                    cellStatus = 'cells disable';
-                  } else {
-                    cellStatus = 'cells enable';
-                  }
+                  let cellStatus = classNames({
+                    'cells disable': !item,
+                    'cells enable': item,
+                  });
                   return (<div className={cellStatus} onClick={enableCell} key={column}></div>);
                 }, this)
               }
