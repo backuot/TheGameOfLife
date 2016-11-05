@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import GameControl from '../components/GameControl';
-import GameField from '../components/GameField';
-import StateField from '../components/StateField';
+import GameControl from '../components/GameControl/GameControl';
+import GameField from '../components/GameField/GameField';
+import StateField from '../components/StateField/StateField';
 import * as gameFieldActions from '../actions/gameFieldActions';
 import * as gameControlActions from '../actions/gameControlActions';
+import styles from '../styles/app.css';
 
 const App = (props) => {
   const { gameFieldState } = props;
@@ -16,7 +17,7 @@ const App = (props) => {
   const { createField } = props.gameControlActions;
 
   return (
-    <div className='main'>
+    <div className={styles.app}>
       <GameControl
         stateGameText={gameControlState.stateGameText}
         setStateGame={setStateGame}

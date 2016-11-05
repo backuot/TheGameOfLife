@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import styles from './styles/gameControl.css';
 
 export default class GameControl extends Component {
   static propTypes = {
@@ -43,10 +44,21 @@ export default class GameControl extends Component {
 
   render() {
     return (
-      <div className='outside'>
-        <div className='cont'>
-          <button className='button button1' onClick={::this.createNewGame}>Новая игра</button>
-          <button className='button button2' onClick={::this.setStateGame}>{this.props.stateGameText}</button>
+      <div className={styles['game-control']}>
+        <div className={styles['game-control__container']}>
+          <button
+            className={
+              `styles['game-control__button']`
+              `styles['game-control__button_new-game']`
+            }
+            onClick={::this.createNewGame}
+          >Новая игра</button>
+          <button
+            className={
+              `styles['game-control__button']`
+              `styles['game-control__button_state-game']`
+            }
+          >{this.props.stateGameText}</button>
         </div>
       </div>
     );

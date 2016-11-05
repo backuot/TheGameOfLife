@@ -1,12 +1,4 @@
-.outside {
-    background-color: #4CAF50;
-    min-width: 400px;
-    width: 410px;
-    height: 406px;
-    border-radius: 10px;
-    padding: 10px 10px 19px 10px;
-    position: absolute;
-}
+
 
 .within {
     background-color: white;
@@ -37,60 +29,13 @@
     background-color: #d8d8d8;
 }
 
-.button {
-    background-color: #f4511e;
-    border: none;
-    min-width: 86px;
-    height: 20px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-family: "MyriadPro", "Arial", "sans-serif";
-    font-weight: 400;
-    cursor: pointer;
-    color: white;
-    outline: none;
-    vertical-align: top;
-}
 
-.button2:hover {
-    background-color: #e0491a;
-}
-
-.button1:hover {
-    background-color: #07789d;
-}
-
-.button1 {
-    background-color: #008CBA;
-}
-
-.button2 {
-    margin-left: 5px;
-}
-
-.outside > .cont {
-    background-color: white;
-    display: inline-block;
-    height: auto;
-    padding: 3px 3px 3px 3px;
-    border-radius: 15px;
-    margin-left: 118px;
-    margin-bottom: 10px;
-}
-
-.button1:active {
-    background-color: #075872;
-}
-
-.button2:active{
-    background-color: #983111;
-}
 
 .cells.enable {
     background-color: #3c8ad8;
 }
 
-.main {
+.app {
     display: -webkit-flex;
     display: flex;
     margin-left: 35%;
