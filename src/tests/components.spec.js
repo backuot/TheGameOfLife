@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import StateField from '../components/StateField';
-import GameControl from '../components/GameControl';
-import GameField from '../components/GameField';
+import StateField from '../components/StateField/StateField';
+import GameControl from '../components/GameControl/GameControl';
+import GameField from '../components/GameField/GameField';
 
 describe('Test: Component StateField', function () {
   const wrapper = shallow(<StateField disable={'0'} enable={'1'} />);

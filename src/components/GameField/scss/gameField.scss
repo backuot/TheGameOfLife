@@ -1,0 +1,31 @@
+.game-field {
+    background-color: white;
+    height: 363px;
+    padding: 1px 0 0 0;
+    width: 408px;
+    position: absolute;
+    margin-top: 45px;
+    margin-left: 10px;
+
+    &__row {
+      display: flex;
+    }
+
+    &__cells {
+      background-color: #ebebeb;
+      min-width: 10px;
+      min-height: 10px;
+      width: 10px;
+      height: 10px;
+      margin-left: 1px;
+      margin-bottom: 1px;
+    }
+
+    &__cells_disable:hover {
+      background-color: #d8d8d8;
+    }
+
+    &__cells_enable {
+      background-color: #3c8ad8;
+    }
+}

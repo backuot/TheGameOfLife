@@ -1,0 +1,58 @@
+.game-control {
+  background-color: #4CAF50;
+  min-width: 400px;
+  width: 410px;
+  height: 406px;
+  border-radius: 10px;
+  padding: 10px 10px 19px 10px;
+  position: absolute;
+
+  &__button {
+    background-color: #f4511e;
+    border: none;
+    min-width: 86px;
+    height: 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: "MyriadPro", "Arial", "sans-serif";
+    font-weight: 400;
+    cursor: pointer;
+    color: white;
+    outline: none;
+    vertical-align: top;
+  }
+
+  &__button_new-game:hover {
+    background-color: #07789d;
+  }
+
+  &__button_state-game:hover {
+    background-color: #e0491a;
+  }
+
+  &__button_new-game:active {
+      background-color: #075872;
+  }
+
+  &__button_state-game:active {
+      background-color: #983111;
+  }
+
+  &__button_new-game {
+    background-color: #008CBA;
+  }
+
+  &__button_state-game {
+    margin-left: 5px;
+  }
+
+  &__container {
+    background-color: white;
+    display: inline-block;
+    height: auto;
+    padding: 3px 3px 3px 3px;
+    border-radius: 15px;
+    margin-left: 118px;
+    margin-bottom: 10px;
+  }
+}

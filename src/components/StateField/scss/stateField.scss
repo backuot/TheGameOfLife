@@ -1,0 +1,19 @@
+.state-field {
+  display: flex;
+  position: absolute;
+  margin-top: 414px;
+  margin-left: 315px;
+  height: 18px;
+
+  &__container {
+    background-color: white;
+    text-align: center;
+    font-family: "MyriadPro", "Arial", "sans-serif";
+    font-weight: 400;
+    font-size: 13px;
+    width: 40px;
+    height: 15px;
+    border-radius: 15px;
+    margin-right: 5px;
+  }
+}

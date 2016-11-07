@@ -72,12 +72,24 @@ module.exports = {
         loader: 'json'
       },
       {
-        test:   /\.css$/,
-        loader: "style-loader!css-loader!postcss-loader"
+        test: /\.css$/,
+        loaders: [
+          'style?sourceMap',
+          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        ]
       },
       {
         test: /\.(png|jpg|svg|ttf|eot|woff|woff2|ico)$/,
         loader: 'file-loader?name=[name].[ext]?[hash]'
+      },
+      {
+        test: /\.scss$/,
+        loaders: [
+            'style?sourceMap',
+            'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+            'resolve-url',
+            'sass?sourceMap',
+        ]
       },
     ]
   },
